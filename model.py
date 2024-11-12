@@ -36,7 +36,7 @@ def train(model, train_loader, criterion, optimizer, epochs=1):#함수 정의(mo
     model.train()#모델을 학습모드로 설정(배치 정규화(미니배치의 평균과 분산을 이용)드롭아웃 활성화)
     for epoch in range(epochs):#전체 데이터셋 반복 횟수
         for images, labels in train_loader:#images: 입력 이미지 데이터, labels: 실제 레이블
-            outputs = model(images)#모델에 넣어 예측 결과를 생성함
+            outputs = model(images)#모델에 넣어 예측 결과를 생성함, model.forward라고 쓰지 않고 이렇게 쓸 수 있는 이유는 일단 pytorch에선 자동적으로 __call__이라는 메서드가 만들어지는데 이것은 model()이런 식으로 썼을 때 어떤 동작을 할지 정해주는 것이다. 그런데 지금 SimpleModel에는 forward라는 메서드 하나밖에 없기때문에 forward 메서드를 호출한다.
             loss = criterion(outputs, labels)#손실함수 계산
             optimizer.zero_grad()#이전 배치에서 계산된 기울기를 초기화함
             loss.backward()#역전파 알고리즘을 사용하여손실함수의 기울기를 계산
