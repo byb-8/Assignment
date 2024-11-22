@@ -1,0 +1,4 @@
+model:
+  lr: 0.00001
+train:
+  epochs: 1
